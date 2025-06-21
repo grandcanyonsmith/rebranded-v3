@@ -1,0 +1,78 @@
+<!-- ===========  CC360 HERO (CLS/LCP‑Optimised)  =========== -->
+<style>
+  /* ─── Container ───────────────────────────────────────── */
+  .cc360-demo-hero{font-family:"Segoe UI",system-ui,sans-serif;background:radial-gradient(circle at 60% 20%,#28c1ff 0%,#0084ff 40%,#006de0 100%);color:#fff;padding:2.5rem 1.5rem;border-radius:34px;box-shadow:0 18px 36px rgba(0,0,0,.25);overflow:hidden;margin:0 auto;max-width:1180px;text-align:center}
+  /* ─── Headline / Copy ─────────────────────────────────── */
+  .cc360-demo-hero h2{font-size:3rem;line-height:1.15;font-weight:800;margin:0 0 1rem}
+  .cc360-demo-hero p{font-size:1.125rem;line-height:1.65;opacity:.95;margin:0 auto 2.25rem;max-width:720px}
+  /* ─── CTA ─────────────────────────────────────────────── */
+  .cc360-demo-cta{display:inline-block;background:#fff;color:#000;font-weight:700;font-size:1rem;padding:14px 38px;border-radius:60px;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,.15);transition:transform .3s ease,box-shadow .3s ease}
+  .cc360-demo-cta:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.22);background:#f4f4f4}
+  /* ─── Card Grid ───────────────────────────────────────── */
+  .cc360-demo-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3.5rem}
+  .cc360-demo-card{background:#e2ff00;color:#000;border-radius:26px;box-shadow:0 8px 16px rgba(0,0,0,.15);padding:1.75rem 1.5rem;display:flex;flex-direction:column;align-items:center;min-height:320px;transition:transform .3s ease,box-shadow .3s ease}
+  .cc360-demo-card:hover{transform:translateY(-5px);box-shadow:0 12px 22px rgba(0,0,0,.2)}
+  .cc360-demo-card img{height:160px;width:auto;margin-bottom:1rem;object-fit:contain}
+  .cc360-demo-card p{font-size:1.05rem;font-weight:700;line-height:1.4;margin:0}
+  /* ─── Floating $ animation (GPU‑only) ─────────────────── */
+  .cc360-demo-money{width:180px;height:180px;margin:0 auto 2rem;animation:cc360-demo-float 5s ease-in-out infinite}
+  @keyframes cc360-demo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  /* ─── Responsive tweaks ───────────────────────────────── */
+  @media(max-width:768px){.cc360-demo-hero{padding:2rem 1rem}.cc360-demo-hero h2{font-size:2.25rem}.cc360-demo-hero p{font-size:1rem}.cc360-demo-card{min-height:280px}.cc360-demo-money{width:140px;height:140px}}
+</style>
+
+<div class="cc360-demo-hero" role="region" aria-label="Course Creator 360 promotion">
+  <!-- Hero Icon (critical for brand; eager load) -->
+  <img
+    src="https://cc360-pages.s3.us-west-2.amazonaws.com/assets/money-floating-transparent.webp"
+    alt="Floating money"
+    class="cc360-demo-money"
+    width="180" height="180"
+    fetchpriority="high" loading="eager" decoding="async"
+  >
+
+  <!-- Value Prop -->
+  <h2>Proven by<br>$30,000,000&nbsp;in Digital Sales</h2>
+  <p>We've personally built and sold $30M+ in digital products to 40,000+ creators, coaches, and experts. We know what works — and we packaged it for you.</p>
+
+  <!-- CTA -->
+  <a href="https://go.coursecreator360.com/cc360-demo" target="_blank" rel="noopener noreferrer" class="cc360-demo-cta">Book A Demo</a>
+
+  <!-- Feature Cards -->
+  <div class="cc360-demo-cards">
+    <div class="cc360-demo-card">
+      <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/assets/course-page-mockup.webp"
+           alt="Battle‑tested templates"
+           width="160" height="160"
+           loading="lazy" decoding="async">
+      <p>Battle‑tested<br>Templates</p>
+    </div>
+
+    <div class="cc360-demo-card">
+      <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/assets/milestone-blueprint-progress.webp"
+           alt="Step‑by‑step blueprints"
+           width="160" height="160"
+           loading="lazy" decoding="async">
+      <p>Step‑by‑step<br>Blueprints</p>
+    </div>
+  </div>
+</div>
+
+<!-- Delay third‑party pixels/analytics until user shows intent -->
+<script>
+(function(){
+  const deferScripts = () => {
+    document.querySelectorAll('script[data-defer-after-load]').forEach(s=>{
+      const el = document.createElement('script');
+      [...s.attributes].forEach(a=>{if(a.name!=='data-defer-after-load')el.setAttribute(a.name,a.value)});
+      el.src = s.dataset.src || s.src;
+      el.async = true;
+      s.replaceWith(el);
+    });
+  };
+  let armed = false;
+  const arm = () => { if(!armed){armed=true;deferScripts();window.removeEventListener('scroll',arm,{passive:true});} };
+  window.addEventListener('scroll',arm,{passive:true});
+})();
+</script>
+<!-- ===========  /CC360 HERO  =========== --> 

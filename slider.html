@@ -1,0 +1,332 @@
+<style>
+/* ============================================
+   CC360 · Testimonial Slider v2.0
+   - Single row, modern design
+   - Drag/touch-to-slide
+   - Infinite scroll with dot navigation
+   ============================================ */
+
+:root {
+  --cc360-ts-bg: #f8f9fa;
+  --cc360-ts-card-bg: #ffffff;
+  --cc360-ts-text: #212529;
+  --cc360-ts-subtext: #6c757d;
+  --cc360-ts-accent: #0475ff;
+  --cc360-ts-radius: 16px;
+  --cc360-ts-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --cc360-ts-transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cc360-ts-bg: transparent;
+    --cc360-ts-card-bg: #1a1a1a;
+    --cc360-ts-text: #f8f9fa;
+    --cc360-ts-subtext: #adb5bd;
+  }
+}
+
+.cc360-testimonial-slider {
+  background-color: var(--cc360-ts-bg);
+  font-family: 'Inter', sans-serif;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.cc360-testimonial-slider-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.cc360-testimonial-slider h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--cc360-ts-text);
+}
+
+.cc360-testimonial-slider p {
+  font-size: 1.125rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  color: var(--cc360-ts-subtext);
+}
+
+.cc360-testimonial-carousel {
+  position: relative;
+  cursor: grab;
+}
+
+.cc360-testimonial-track {
+  display: flex;
+  will-change: transform;
+}
+
+.cc360-testimonial-slide {
+  flex: 0 0 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .cc360-testimonial-slide {
+    flex-basis: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cc360-testimonial-slide {
+    flex-basis: 33.333%;
+  }
+}
+
+.cc360-testimonial-card {
+  background: var(--cc360-ts-card-bg);
+  border-radius: var(--cc360-ts-radius);
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--cc360-ts-shadow);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.cc360-testimonial-card-content {
+  flex-grow: 1;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  color: var(--cc360-ts-subtext);
+}
+
+.cc360-testimonial-card-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cc360-testimonial-card-author img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cc360-testimonial-card-author-info .name {
+  font-weight: 700;
+  color: var(--cc360-ts-text);
+}
+
+.cc360-testimonial-card-author-info .title {
+  font-size: 0.875rem;
+  color: var(--cc360-ts-subtext);
+}
+
+/* Navigation */
+.cc360-testimonial-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.cc360-testimonial-nav:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.cc360-testimonial-nav.prev { left: -22px; }
+.cc360-testimonial-nav.next { right: -22px; }
+
+@media (max-width: 1244px) {
+  .cc360-testimonial-nav.prev { left: 1rem; }
+  .cc360-testimonial-nav.next { right: 1rem; }
+}
+
+/* Dots */
+.cc360-testimonial-dots {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.cc360-testimonial-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cc360-testimonial-dot.active {
+  background: var(--cc360-ts-accent);
+}
+</style>
+
+<section class="cc360-testimonial-slider" aria-labelledby="testimonial-heading">
+  <div class="cc360-testimonial-slider-container">
+    <h2 id="testimonial-heading">Loved by Creators Worldwide</h2>
+    <p>Don't just take our word for it. Here's what some of our 3,000+ creators have to say about their experience.</p>
+
+    <div class="cc360-testimonial-carousel">
+      <div class="cc360-testimonial-track"></div>
+      <button class="cc360-testimonial-nav prev" aria-label="Previous testimonial">&#8249;</button>
+      <button class="cc360-testimonial-nav next" aria-label="Next testimonial">&#8250;</button>
+    </div>
+    
+    <div class="cc360-testimonial-dots"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const testimonials = [
+    { name: 'Sarah J.', title: 'Fitness Coach', image: 'https://randomuser.me/api/portraits/women/44.jpg', text: 'This platform transformed my business. I went from zero to a six-figure income in just under a year. The tools are intuitive and the support is second to none.' },
+    { name: 'Michael C.', title: 'Marketing Guru', image: 'https://randomuser.me/api/portraits/men/46.jpg', text: 'As someone who has used every tool under the sun, CC360 is a breath of fresh air. It replaces at least five different subscriptions for me. A true all-in-one solution.' },
+    { name: 'Emily R.', title: 'Artist & Creator', image: 'https://randomuser.me/api/portraits/women/47.jpg', text: 'I\'m not a tech person, but CC360 made it incredibly simple to build and launch my online art courses. My community has never been more engaged. Thank you!' },
+    { name: 'David L.', title: 'Business Consultant', image: 'https://randomuser.me/api/portraits/men/48.jpg', text: 'The ROI is insane. The funnel builder alone has doubled my lead conversion rate. If you\'re serious about your online business, this is a no-brainer.' },
+    { name: 'Jessica W.', title: 'Author & Speaker', image: 'https://randomuser.me/api/portraits/women/49.jpg', text: 'The customer support is what sold me. They are responsive, knowledgeable, and genuinely seem to care about my success. I feel like I have a true partner.' },
+  ];
+
+  const track = document.querySelector('.cc360-testimonial-track');
+  const dotsContainer = document.querySelector('.cc360-testimonial-dots');
+  
+  if (!track) return;
+
+  // 1. Populate slides and dots
+  testimonials.forEach((testimonial, index) => {
+    // Create Slide
+    const slide = document.createElement('div');
+    slide.className = 'cc360-testimonial-slide';
+    slide.innerHTML = `
+      <div class="cc360-testimonial-card">
+        <div class="cc360-testimonial-card-content">“${testimonial.text}”</div>
+        <div class="cc360-testimonial-card-author">
+          <img src="${testimonial.image}" alt="${testimonial.name}" width="50" height="50" loading="lazy">
+          <div class="cc360-testimonial-card-author-info">
+            <div class="name">${testimonial.name}</div>
+            <div class="title">${testimonial.title}</div>
+          </div>
+        </div>
+      </div>
+    `;
+    track.appendChild(slide);
+
+    // Create Dot
+    const dot = document.createElement('span');
+    dot.className = 'cc360-testimonial-dot';
+    dot.dataset.index = index;
+    dotsContainer.appendChild(dot);
+  });
+  
+  const slides = Array.from(track.children);
+  const dots = Array.from(dotsContainer.children);
+  let slideWidth = slides[0].getBoundingClientRect().width;
+  let currentIndex = 0;
+  
+  // Set initial state
+  dots[0].classList.add('active');
+
+  // 2. Core Slider Logic
+  const goToSlide = (index) => {
+    track.style.transition = 'transform 0.4s ease-in-out';
+    track.style.transform = `translateX(-${slideWidth * index}px)`;
+    currentIndex = index;
+    updateDots();
+  };
+
+  const updateDots = () => {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentIndex].classList.add('active');
+  };
+
+  // 3. Navigation
+  const nextBtn = document.querySelector('.cc360-testimonial-nav.next');
+  const prevBtn = document.querySelector('.cc360-testimonial-nav.prev');
+
+  nextBtn.addEventListener('click', () => {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    goToSlide(nextIndex);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+    goToSlide(prevIndex);
+  });
+  
+  dotsContainer.addEventListener('click', e => {
+    if(e.target.matches('.cc360-testimonial-dot')) {
+      goToSlide(parseInt(e.target.dataset.index));
+    }
+  })
+
+  // 4. Drag/Touch functionality
+  let isDragging = false;
+  let startPos = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  
+  const getPositionX = e => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+  const dragStart = (e) => {
+    isDragging = true;
+    startPos = getPositionX(e);
+    track.style.transition = 'none'; // Disable transition during drag
+    track.style.cursor = 'grabbing';
+  };
+
+  const drag = (e) => {
+    if (isDragging) {
+      const currentPosition = getPositionX(e);
+      currentTranslate = prevTranslate + currentPosition - startPos;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+  };
+
+  const dragEnd = () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (movedBy < -100 && currentIndex < slides.length - 1) {
+      currentIndex += 1;
+    }
+    if (movedBy > 100 && currentIndex > 0) {
+      currentIndex -= 1;
+    }
+    
+    goToSlide(currentIndex);
+    prevTranslate = currentTranslate;
+  };
+
+  track.addEventListener('mousedown', dragStart);
+  track.addEventListener('touchstart', dragStart);
+  track.addEventListener('mouseup', dragEnd);
+  track.addEventListener('touchend', dragEnd);
+  track.addEventListener('mouseleave', dragEnd);
+  track.addEventListener('mousemove', drag);
+  track.addEventListener('touchmove', drag);
+
+  // 5. Resize handler
+  window.addEventListener('resize', () => {
+    slideWidth = slides[0].getBoundingClientRect().width;
+    goToSlide(currentIndex);
+  });
+  
+})();
+</script>

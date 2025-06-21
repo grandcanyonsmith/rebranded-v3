@@ -1,0 +1,205 @@
+<style>
+:root{
+  --cc360-comp-navy-1:#0d1c32; --cc360-comp-navy-2:#17345b;
+  --cc360-comp-border:#1e4eff; --cc360-comp-label:#9db9ff;
+  --cc360-comp-copy:#eaf0ff;   --cc360-comp-neon:#d4ff00;
+}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+.cc360-comp-section {
+  padding-inline: 1.5rem;
+}
+@media (max-width: 768px) {
+  .cc360-comp-section {
+    padding-inline: 1rem;
+  }
+}
+
+/* reset (inside widget) */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* card shell */
+.cc360-comp-card{
+  max-width:880px;margin-inline:auto;
+  padding:32px 32px 40px;border-radius:28px;
+  background:linear-gradient(135deg,var(--cc360-comp-navy-1),var(--cc360-comp-navy-2));
+  border:1px solid var(--cc360-comp-border);color:var(--cc360-comp-copy);
+  font:400 14px/1.45 Inter,system-ui,sans-serif;
+  box-shadow:0 4px 20px rgba(0,0,0,.35);
+}
+.cc360-comp-card h2{
+  font-weight:700;font-size:clamp(1.5rem,4vw,2.25rem);
+  line-height:1.3;text-align:center;margin-bottom:32px;
+  color: #fff;
+}
+
+/* desktop column labels */
+.cc360-comp-header{
+  display:none;grid-template-columns:120px 1fr 96px 32px;
+  font-weight:600;font-size:.9rem;color:var(--cc360-comp-label);margin-bottom:16px;
+}
+.cc360-comp-header span:first-child{text-align:right;padding-right:8px}
+.cc360-comp-header span:nth-child(2){padding-left:16px}
+.cc360-comp-header span:nth-child(3){padding-left:8px}
+.cc360-comp-header span:last-child{text-align:center}
+
+/* rows container */
+.cc360-comp-rows{display:flex;flex-direction:column;row-gap:18px}
+
+/* row grid (mobile default) */
+.cc360-comp-row{
+  display:grid;grid-template-columns:120px 1fr 32px;
+  column-gap:8px;align-items:center;font-size:.95rem;
+}
+
+/* ≥640 px add price column & header */
+@media(min-width:640px){
+  .cc360-comp-header{display:grid}
+  .cc360-comp-row{grid-template-columns:120px 1fr 96px 32px}
+}
+
+/* logo cluster */
+.cc360-comp-logos{display:flex;justify-content:flex-end;gap:4px;padding-right:8px}
+.cc360-comp-logo{width:36px;height:36px;border-radius:50%;background:#fff;object-fit:contain}
+
+/* feature + inline price */
+.cc360-comp-text{display:flex;flex-direction:column;row-gap:2px}
+.cc360-comp-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+.cc360-comp-price-inline{font-size:.84rem;opacity:.9}
+@media(min-width:640px){.cc360-comp-price-inline{display:none}}
+
+/* desktop price column */
+.cc360-comp-price-col{display:none;font-size:.88rem;padding-left:8px}
+@media(min-width:640px){.cc360-comp-price-col{display:block}}
+
+/* tick ✓ */
+.cc360-comp-tick{
+  width:24px;height:24px;border-radius:50%;background:var(--cc360-comp-neon);
+  display:grid;place-items:center;
+}
+.cc360-comp-tick svg{
+  width:60%;height:60%;stroke:var(--cc360-comp-navy-1);stroke-width:3;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* footer prices */
+.cc360-comp-total{
+  margin-top:40px;display:flex;justify-content:space-between;align-items:flex-end
+}
+.cc360-comp-old{font-size:1.55rem;font-weight:600;text-decoration:line-through;text-decoration-thickness:2px;color:#ff7b7b}
+.cc360-comp-new{text-align:right}
+.cc360-comp-new span:first-child{font-size:2.8rem;font-weight:700}
+.cc360-comp-new small{font-size:.7rem;color:#b9c4e6}
+</style>
+
+<!-- ②  MARKUP -->
+<section class="cc360-comp-section" aria-labelledby="cc360-comp-heading">
+  <div class="cc360-comp-card">
+    <h2 id="cc360-comp-heading">"I cancelled all these softwares within 14 days."</h2>
+
+    <div class="cc360-comp-header">
+      <span>REPLACES</span><span>FEATURES</span><span>PRICE</span><span></span>
+    </div>
+
+    <div id="cc360-comp-rows" class="cc360-comp-rows"></div>
+
+    <div class="cc360-comp-total">
+      <span class="cc360-comp-old">$1400+/mo</span>
+      <span class="cc360-comp-new"><span>$79</span><br><small>Starting&nbsp;plan</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- ③  DATA + RENDER -->
+<script>
+const rows = document.getElementById('cc360-comp-rows');
+
+const data = [
+  {logos:[
+      'https://logosandtypes.com/wp-content/uploads/2024/11/Kajabi.png',
+      'https://cdn.prod.website-files.com/61bec4e6d491fc564ab7f7a5/63bc16e60bfa7a030aea6b2c_teachable%20icon.svg',
+      'https://images.seeklogo.com/logo-png/39/1/thinkific-logo-png_seeklogo-394202.png'],
+   feature:'Course building & hosting',price:'$149+/mo.'},
+  {logos:[
+      'https://logo.clearbit.com/skool.com',
+      'https://logo.clearbit.com/mightynetworks.com',
+      'https://logo.clearbit.com/circle.so'],
+   feature:'Community & gamification',price:'$99+/mo.'},
+  {logos:[
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT60d2dWuZ_Oog7KD7NlN689Ap7wM4s7qcg2A&s',
+      'https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg',
+      'https://s3.amazonaws.com/integrated-apps/zgriluef/fdguscwv.jpg'],
+   feature:'Email sending & CRM',price:'$199+/mo.'},
+  {logos:[
+      'https://upload.wikimedia.org/wikipedia/commons/7/76/Wix.com_website_logo.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/7/75/Squarespace_Logo_2019.png',
+      'https://upload.wikimedia.org/wikipedia/commons/9/98/WordPress_blue_logo.svg'],
+   feature:'Website & page building',price:'$35+/mo.'},
+  {logos:[
+      'https://pageflows.com/media/logos/cf_FQhG2sN.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrewqdwAY9gKyF_C2iLZzmZZjZA6bkYjqMow&s'],
+   feature:'Funnel building',price:'$199+/mo.'},
+  {logos:[
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAupoS43WFWeqjq_BGoBopW_j1tNPzdQe8Hw&s',
+      'https://logo.clearbit.com/honeybook.com'],
+   feature:'Calendar booking',price:'$49+/mo.'},
+  {logos:[
+      'https://upload.wikimedia.org/wikipedia/commons/d/d7/Typeform_logo.svg'],
+   feature:'Surveys & forms',price:'$25+/mo.'},
+  {logos:[
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_4bpOHmH1VZ9p7lIsKea-Tvh1Qze7ebT2RA&s',
+      'https://cdn.prod.website-files.com/66aa1c43892a8b8309208157/675fecda927909f55d5908e7_9pVK8nPfUoV5MqauGqLrJQ8BvkNXjhfOVNQKT0f-Ok8.png'],
+   feature:'Social automation',price:'$50+/mo.'},
+  {logos:[
+      'https://appexchange.salesforce.com/partners/servlet/servlet.FileDownload?file=00P4V000010I5YfUAK',
+      'https://plgdemos.com/content/images/2024/04/icon.svg'],
+   feature:'Automation',price:'$99+/mo.'},
+  {logos:[
+      'https://logo.clearbit.com/pandadoc.com',
+      'https://logo.clearbit.com/leadpages.net'],
+   feature:'Contracts & estimates',price:'$47+/mo.'},
+  {logos:[
+      'https://logo.clearbit.com/gumroad.com',
+      'https://www.svgrepo.com/show/303503/shopify-logo.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/2/2a/WooCommerce_logo.svg'],
+   feature:'Online store',price:'$39+/mo.'},
+  {logos:[
+      'https://upload.wikimedia.org/wikipedia/commons/9/9c/Vimeo_Logo.svg',
+      'https://logo.clearbit.com/wistia.com'],
+   feature:'Video hosting',price:'$99+/mo.'}
+];
+
+/* render rows */
+data.forEach(({logos,feature,price})=>{
+  const row=document.createElement('div');row.className='cc360-comp-row';
+
+  /* logos */
+  const logoBox=document.createElement('div');logoBox.className='cc360-comp-logos';
+  logos.forEach(src=>logoBox.insertAdjacentHTML(
+    'beforeend',`<img class="cc360-comp-logo" src="${src}" loading="lazy" alt="" width="36" height="36">`));
+  row.appendChild(logoBox);
+
+  /* feature + inline price (mobile) */
+  row.insertAdjacentHTML('beforeend',`
+    <div class="cc360-comp-text">
+      <span class="cc360-comp-title">${feature}</span>
+      <span class="cc360-comp-price-inline">${price}</span>
+    </div>`);
+
+  /* desktop price column */
+  row.insertAdjacentHTML('beforeend',`<div class="cc360-comp-price-col">${price}</div>`);
+
+  /* tick ✓ */
+  row.insertAdjacentHTML('beforeend',`
+    <span class="cc360-comp-tick" role="img" aria-label="Included">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+        <path d="M6 13l4 4 8-9"/>
+      </svg>
+    </span>`);
+
+  rows.appendChild(row);
+});
+</script> 

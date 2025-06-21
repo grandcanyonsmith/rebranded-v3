@@ -1,0 +1,392 @@
+<!-- Inter font (optional, can remove or change) -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+  rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
+>
+
+<style>
+  /* ================== CC360 Pricing Component (cc360-pricing) ==================
+     - 1 column on smaller screens (max-width: 640px)
+     - Uses pure CSS, no Tailwind
+     - Responsive for mobile
+  */
+
+  /* ========== Reset & base ========== */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* ========== CC360 Pricing Container ========== */
+  .cc360-pricing {
+    --cc360-pricing-blue: #0475ff;
+    --cc360-pricing-blue-dark: #0d2d5b;
+    --cc360-pricing-bg-start: #000;
+    --cc360-pricing-bg-end: #001e44;
+    --cc360-pricing-card: #e9f4ff;
+    --cc360-pricing-text: #001e44;
+    --cc360-pricing-body: #f4feff;
+    --cc360-pricing-radius: 12px;
+    --cc360-pricing-gap: 2rem;
+    --cc360-pricing-max-width: 1200px;
+
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: var(--cc360-pricing-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* ========== Billing Toggle Styles ========== */
+  .cc360-pricing-tabs {
+    position: relative;
+    display: flex;
+    width: 420px;
+    height: 60px;
+    background: var(--cc360-pricing-blue-dark);
+    border-radius: var(--cc360-pricing-radius);
+    margin: 2.5rem auto 1.5rem;
+    overflow: hidden;
+  }
+  .cc360-pricing-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--cc360-pricing-body);
+    font-weight: 600;
+    font-size: .875rem;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: var(--cc360-pricing-radius);
+    transition: color .2s;
+  }
+  .cc360-pricing-tab[aria-selected="true"] {
+    color: #fff;
+  }
+  .cc360-pricing-glider {
+    position: absolute;
+    inset: 0;
+    width: 50%;
+    background: var(--cc360-pricing-blue);
+    border-radius: var(--cc360-pricing-radius);
+    transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+    will-change: transform;
+  }
+
+  /* ========== Pricing Grid ========== */
+  .cc360-pricing-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--cc360-pricing-gap);
+    width: min(100%, var(--cc360-pricing-max-width));
+    margin-bottom: 4rem;
+    padding-inline: 1.5rem;
+  }
+
+  @media(max-width: 768px) {
+    .cc360-pricing-plans {
+      padding-inline: 1rem;
+    }
+  }
+
+  /* ---- 1 column for smaller screens ---- */
+  @media(max-width: 640px) {
+    .cc360-pricing-plans {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ========== Card (individual plan) ========== */
+  .cc360-pricing-plan {
+    background: var(--cc360-pricing-card);
+    color: var(--cc360-pricing-text);
+    border-radius: var(--cc360-pricing-radius);
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .06);
+    display: flex;
+    flex-direction: column;
+    animation: cc360-pricing-fade .4s ease-out backwards;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .cc360-pricing-plan--popular {
+    box-shadow:
+      0 0 0 3px var(--cc360-pricing-blue),
+      0 8px 16px rgba(0, 0, 0, .08);
+  }
+
+  /* ========== Card Contents & Typography ========== */
+  .cc360-pricing-plan h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: .4rem;
+  }
+  .cc360-pricing-badge {
+    background: var(--cc360-pricing-blue);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .35rem .7rem;
+    border-radius: 9999px;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+  .cc360-pricing-sub {
+    font-size: .875rem;
+    color: #334155;
+    margin-bottom: .8rem;
+    min-height: 40px;
+  }
+
+  .cc360-pricing-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: .25rem;
+    margin-bottom: 1.25rem;
+  }
+  .cc360-pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .cc360-pricing-price-small {
+    font-size: .75rem;
+    color: #64748b;
+    text-decoration: line-through;
+  }
+  .cc360-pricing-bill {
+    font-size: .75rem;
+    color: #334155;
+  }
+
+  .cc360-pricing-btn {
+    display: block;
+    margin-top: 1rem;
+    padding: .6rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: .875rem;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: var(--cc360-pricing-blue-dark);
+    transition: all .2s ease;
+  }
+  .cc360-pricing-btn--blue {
+    background: var(--cc360-pricing-blue);
+  }
+  .cc360-pricing-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+  .cc360-pricing-features {
+    list-style: none;
+    margin-top: 1.5rem;
+    flex: 1;
+  }
+  .cc360-pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    font-size: .85rem;
+    color: #334155;
+    margin-bottom: .6rem;
+  }
+  .cc360-pricing-features svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-right: .45rem;
+    color: var(--cc360-pricing-blue);
+  }
+
+  @keyframes cc360-pricing-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ========== Minor Tweaks For Very Narrow Screens ========== */
+  @media(max-width: 500px) {
+    .cc360-pricing-tabs {
+      transform: scale(.9);
+      width: 340px;
+    }
+    .cc360-pricing-price {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<div class="cc360-pricing" role="region" aria-labelledby="cc360-pricing-heading">
+  <h1 id="cc360-pricing-heading" style="text-align: center; margin: 2rem 0; font-size: 2.5rem; font-weight: 700;">Simple, Transparent Pricing</h1>
+  
+  <!-- Billing Toggle -->
+  <div class="cc360-pricing-tabs" role="tablist" aria-label="Billing period">
+    <button class="cc360-pricing-tab" role="tab" aria-selected="true" aria-controls="monthly-panel">Monthly</button>
+    <button class="cc360-pricing-tab" role="tab" aria-selected="false" aria-controls="yearly-panel">Yearly (Save 20%)</button>
+    <div class="cc360-pricing-glider"></div>
+  </div>
+
+  <!-- Pricing Plans -->
+  <div class="cc360-pricing-plans">
+    <!-- Starter Plan -->
+    <div class="cc360-pricing-plan" role="article" aria-labelledby="starter-plan">
+      <h2 id="starter-plan">Starter</h2>
+      <p class="cc360-pricing-sub">Perfect for getting started</p>
+      
+      <div class="cc360-pricing-price-wrap">
+        <span class="cc360-pricing-price">$79</span>
+        <span class="cc360-pricing-bill">/month</span>
+      </div>
+      
+      <a href="#" class="cc360-pricing-btn" aria-label="Get started with Starter plan">Get Started</a>
+      
+      <ul class="cc360-pricing-features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Up to 1,000 students
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          5 courses
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Basic templates
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Email support
+        </li>
+      </ul>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="cc360-pricing-plan cc360-pricing-plan--popular" role="article" aria-labelledby="pro-plan">
+      <h2 id="pro-plan">Pro</h2>
+      <span class="cc360-pricing-badge">Most Popular</span>
+      <p class="cc360-pricing-sub">For growing creators</p>
+      
+      <div class="cc360-pricing-price-wrap">
+        <span class="cc360-pricing-price">$199</span>
+        <span class="cc360-pricing-bill">/month</span>
+      </div>
+      
+      <a href="#" class="cc360-pricing-btn cc360-pricing-btn--blue" aria-label="Get started with Pro plan">Get Started</a>
+      
+      <ul class="cc360-pricing-features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Up to 10,000 students
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Unlimited courses
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Advanced templates
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Priority support
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Advanced analytics
+        </li>
+      </ul>
+    </div>
+
+    <!-- Enterprise Plan -->
+    <div class="cc360-pricing-plan" role="article" aria-labelledby="enterprise-plan">
+      <h2 id="enterprise-plan">Enterprise</h2>
+      <p class="cc360-pricing-sub">For large organizations</p>
+      
+      <div class="cc360-pricing-price-wrap">
+        <span class="cc360-pricing-price">$499</span>
+        <span class="cc360-pricing-bill">/month</span>
+      </div>
+      
+      <a href="#" class="cc360-pricing-btn" aria-label="Contact sales for Enterprise plan">Contact Sales</a>
+      
+      <ul class="cc360-pricing-features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Unlimited students
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Custom integrations
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          White-label options
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Dedicated support
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// Billing toggle functionality
+const tabs = document.querySelectorAll('.cc360-pricing-tab');
+const glider = document.querySelector('.cc360-pricing-glider');
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => {
+    // Update aria-selected
+    tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+    tab.setAttribute('aria-selected', 'true');
+    
+    // Move glider
+    glider.style.transform = `translateX(${index * 100}%)`;
+    
+    // Update prices (you can add price switching logic here)
+    console.log(`Switched to ${index === 0 ? 'monthly' : 'yearly'} billing`);
+  });
+});
+</script> 

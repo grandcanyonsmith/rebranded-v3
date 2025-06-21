@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Creator 360 - All-in-One Platform for Course Creators</title>
+    <meta name="description" content="Build, launch, and scale your online courses with Course Creator 360. All-in-one platform with proven templates, automation, and 24/7 support.">
+    
+    <!-- Preload critical resources for LCP optimization -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload hero image for LCP -->
+    <link rel="preload" href="https://cc360-pages.s3.us-west-2.amazonaws.com/assets/money-floating-transparent.webp" as="image" type="image/webp">
+    
+    <!-- Course Creator 360 Data -->
+    <script id="cc-data" type="application/json">
+    {
+      "logo": "https://cc360-pages.s3.us-west-2.amazonaws.com/course-creator-360-logo.webp",
+      "links": { "home": "/", "pricing": "/pricing", "login": "/login", "cta": "/get-started" },
+      "sections": [
+        {
+          "title": "Create",
+          "color": "#2563eb",
+          "onDark": "#ebf4ff",
+          "items": [
+            ["Online Courses", "/courses"],
+            ["Communities & Memberships", "/communities"],
+            ["Coaching", "/coaching"],
+            ["Digital Downloads", "/downloads"],
+            ["Certifications & Challenges", "/certifications"],
+            ["Branded Mobile App", "/app"]
+          ]
+        },
+        {
+          "title": "Market",
+          "color": "#cdf600",
+          "onDark": "#1d2b00",
+          "items": [
+            ["Landing Pages", "/landing-pages"],
+            ["Funnels & Lead Magnets", "/funnels"],
+            ["Email & SMS Marketing", "/email-sms"],
+            ["Webinars", "/webinars"],
+            ["Affiliate Programs", "/affiliates"],
+            ["Social Automations", "/social"]
+          ]
+        },
+        {
+          "title": "Sell & Scale",
+          "color": "#f43f5e",
+          "onDark": "#fff1f3",
+          "items": [
+            ["Payment Pipelines", "/payments"],
+            ["Automations", "/automations"],
+            ["Analytics", "/analytics"],
+            ["CRM", "/crm"]
+          ]
+        }
+      ]
+    }
+    </script>
+    
+    <!-- STYLE -->
+    <style>
+    /* CC360 Main Styles - Unique Namespace */
+    :root {
+        --cc360-main-fg: #111;
+        --cc360-main-bg: #fff;
+        --cc360-main-accent: #0475ff;
+        --cc360-main-border: #e5e7eb;
+        --cc360-main-radius: 12px;
+        --cc360-main-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --cc360-main-transition: all 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --cc360-main-fg: #f9fafb;
+            --cc360-main-bg: #111;
+            --cc360-main-border: #374151;
+        }
+    }
+
+    /* Reset and base styles */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: var(--cc360-main-fg);
+        background: var(--cc360-main-bg);
+    }
+
+    /* Header styles */
+    .cc360-main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--cc360-main-bg);
+        border-bottom: 1px solid var(--cc360-main-border);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .cc360-main-nav {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 768px) {
+        .cc360-main-nav {
+            padding: 1rem;
+        }
+    }
+
+    .cc360-main-logo {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--cc360-main-fg);
+        text-decoration: none;
+    }
+
+    .cc360-main-nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        .cc360-main-nav-links {
+            display: none;
+        }
+    }
+
+    .cc360-main-nav-link {
+        color: var(--cc360-main-fg);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--cc360-main-transition);
+    }
+
+    .cc360-main-nav-link:hover {
+        color: var(--cc360-main-accent);
+    }
+
+    .cc360-main-cta {
+        background: var(--cc360-main-accent);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--cc360-main-radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--cc360-main-transition);
+    }
+
+    .cc360-main-cta:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--cc360-main-shadow);
+    }
+
+    /* Mobile menu button */
+    .cc360-main-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: var(--cc360-main-fg);
+    }
+
+    @media (max-width: 768px) {
+        .cc360-main-menu-btn {
+            display: block;
+        }
+    }
+
+    .cc360-main-menu-btn span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: currentColor;
+        margin: 4px 0;
+        transition: var(--cc360-main-transition);
+    }
+
+    .cc360-main-menu-btn[aria-expanded="true"] span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .cc360-main-menu-btn[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .cc360-main-menu-btn[aria-expanded="true"] span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Mobile drawer */
+    .cc360-main-drawer {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--cc360-main-bg);
+        border-left: 1px solid var(--cc360-main-border);
+        z-index: 1001;
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+    }
+
+    .cc360-main-drawer[aria-hidden="false"] {
+        right: 0;
+    }
+
+    .cc360-main-drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .cc360-main-drawer-link {
+        color: var(--cc360-main-fg);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--cc360-main-border);
+    }
+
+    .cc360-main-drawer-cta {
+        background: var(--cc360-main-accent);
+        color: white;
+        padding: 0.75rem 1rem;
+        border-radius: var(--cc360-main-radius);
+        text-decoration: none;
+        font-weight: 600;
+        text-align: center;
+        margin-top: auto;
+    }
+
+    /* Modal styles */
+    .cc360-main-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1002;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .cc360-main-modal[aria-hidden="false"] {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .cc360-main-modal-content {
+        background: var(--cc360-main-bg);
+        padding: 2rem;
+        border-radius: var(--cc360-main-radius);
+        max-width: 400px;
+        width: 90%;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .cc360-main-modal[aria-hidden="false"] .cc360-main-modal-content {
+        transform: scale(1);
+    }
+
+    .cc360-main-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--cc360-main-fg);
+        padding: 0.25rem;
+    }
+
+    .cc360-main-modal h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .cc360-main-modal-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cc360-main-modal-input {
+        padding: 0.75rem;
+        border: 1px solid var(--cc360-main-border);
+        border-radius: var(--cc360-main-radius);
+        font-size: 1rem;
+        background: var(--cc360-main-bg);
+        color: var(--cc360-main-fg);
+    }
+
+    .cc360-main-modal-input:focus {
+        outline: none;
+        border-color: var(--cc360-main-accent);
+        box-shadow: 0 0 0 3px rgba(4, 117, 255, 0.1);
+    }
+
+    .cc360-main-modal-submit {
+        background: var(--cc360-main-accent);
+        color: white;
+        padding: 0.75rem;
+        border: none;
+        border-radius: var(--cc360-main-radius);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--cc360-main-transition);
+    }
+
+    .cc360-main-modal-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--cc360-main-shadow);
+    }
+
+    .cc360-main-modal-legal {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .cc360-main-modal-legal a {
+        color: var(--cc360-main-accent);
+        text-decoration: none;
+    }
+
+    /* Backdrop blur effect */
+    .cc360-main-backdrop-blur {
+        filter: blur(4px);
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    /* Override browser autofill styles */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--cc360-main-bg) inset !important;
+        -webkit-text-fill-color: var(--cc360-main-fg) !important;
+        caret-color: var(--cc360-main-fg) !important;
+    }
+
+    /* Main content spacing */
+    .cc360-main-content > div {
+        padding-block: 4rem;
+    }
+
+    @media (max-width: 768px) {
+        .cc360-main-content > div {
+            padding-block: 3rem;
+        }
+    }
+
+    /* Load font styles */
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+</head>
+<body>
+<!-- Header -->
+<header class="cc360-main-header" role="banner">
+    <nav class="cc360-main-nav" role="navigation" aria-label="Main navigation">
+        <a href="#" class="cc360-main-logo" aria-label="Course Creator 360 Home">Course Creator 360</a>
+        
+        <div class="cc360-main-nav-links">
+            <a href="#features" class="cc360-main-nav-link">Features</a>
+            <a href="#pricing" class="cc360-main-nav-link">Pricing</a>
+            <a href="#demo" class="cc360-main-nav-link">Demo</a>
+            <a href="#login" class="cc360-main-nav-link">Login</a>
+            <a href="#get-started" class="cc360-main-cta cc360-main-open-modal" aria-label="Get Started">Get Started</a>
+        </div>
+        
+        <button class="cc360-main-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="cc360-main-drawer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+</header>
+
+<!-- Mobile drawer -->
+<aside class="cc360-main-drawer" id="cc360-main-drawer" aria-label="Mobile menu" aria-hidden="true" tabindex="-1">
+    <nav class="cc360-main-drawer-nav" aria-label="Mobile navigation">
+        <a href="#features" class="cc360-main-drawer-link">Features</a>
+        <a href="#pricing" class="cc360-main-drawer-link">Pricing</a>
+        <a href="#demo" class="cc360-main-drawer-link">Demo</a>
+        <a href="#login" class="cc360-main-drawer-link">Login</a>
+    </nav>
+    <a href="#get-started" class="cc360-main-drawer-cta cc360-main-open-modal">Get Started →</a>
+</aside>
+
+<!-- Modal -->
+<dialog class="cc360-main-modal" id="cc360-main-modal" aria-labelledby="cc360-main-modal-title" aria-hidden="true">
+    <div class="cc360-main-modal-content">
+        <button class="cc360-main-modal-close" aria-label="Close modal">&times;</button>
+        <h2 id="cc360-main-modal-title">Get Started with Course Creator 360</h2>
+        <form class="cc360-main-modal-form" action="#" method="POST">
+            <input type="email" class="cc360-main-modal-input" placeholder="Enter your email" required aria-label="Email address">
+            <button type="submit" class="cc360-main-modal-submit">Get Started</button>
+        </form>
+        <p class="cc360-main-modal-legal">By proceeding you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy</a>.</p>
+    </div>
+</dialog>
+
+<!-- Main content -->
+<main class="cc360-main-content" role="main">
+    <!-- Section containers -->
+    <div id="hero-section"></div>
+    <div id="comparison-section"></div>
+    <div id="info-section"></div>
+    <div id="demo-section"></div>
+    <div id="pricing-section"></div>
+    <div id="slider-section"></div>
+</main>
+
+<!-- Scripts -->
+<script>
+(()=>{'use strict';
+
+// Header, drawer, modal behavior
+const header = document.querySelector('.cc360-main-header');
+const menuBtn = document.querySelector('.cc360-main-menu-btn');
+const drawer = document.querySelector('.cc360-main-drawer');
+const modal = document.querySelector('.cc360-main-modal');
+const openModalBtns = document.querySelectorAll('.cc360-main-open-modal');
+const closeModalBtn = document.querySelector('.cc360-main-modal-close');
+const modalContent = document.querySelector('.cc360-main-modal-content');
+
+// Mobile menu toggle
+menuBtn?.addEventListener('click', () => {
+    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', !isExpanded);
+    drawer.setAttribute('aria-hidden', isExpanded);
+    
+    if (!isExpanded) {
+        drawer.focus();
+        document.body.classList.add('cc360-main-backdrop-blur');
+    } else {
+        document.body.classList.remove('cc360-main-backdrop-blur');
+    }
+});
+
+// Close drawer when clicking outside
+document.addEventListener('click', (e) => {
+    if (drawer && !drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+        menuBtn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('cc360-main-backdrop-blur');
+    }
+});
+
+// Modal functionality
+openModalBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('cc360-main-backdrop-blur');
+        modalContent.querySelector('input').focus();
+    });
+});
+
+closeModalBtn?.addEventListener('click', () => {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cc360-main-backdrop-blur');
+});
+
+// Close modal when clicking backdrop
+modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('cc360-main-backdrop-blur');
+    }
+});
+
+// Load sections dynamically
+const sections = {
+    'hero-section': 'hero.html',
+    'comparison-section': 'comparison.html',
+    'info-section': 'info.html',
+    'demo-section': 'demo.html',
+    'pricing-section': 'pricing.html',
+    'slider-section': 'slider.html'
+};
+
+Object.entries(sections).forEach(([id, file]) => {
+    fetch(file)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById(id).innerHTML = html;
+        })
+        .catch(error => {
+            console.error(`Error loading ${file}:`, error);
+        });
+});
+
+})();
+</script>
+</body>
+</html> 

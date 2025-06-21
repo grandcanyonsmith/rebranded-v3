@@ -1,0 +1,645 @@
+<!-- 0 ▸ Font preconnect & Inter import (won't block LCP) -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+  rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
+>
+
+<!-- 1 ▸ Scoped CSS (namespaced to cc360-hero-*) -->
+<style>
+:root {
+  --cc360-hero-blue: #0475ff;
+  --cc360-hero-blue-hv: #0362d3;
+  --cc360-hero-red: #ff2f00;
+  --cc360-hero-red-hv: #df2600;
+  --cc360-hero-gray: #6b7280;
+  --cc360-hero-pill: 9999px;
+  --cc360-hero-curve-lg: 12vw;
+  --cc360-hero-curve-sm: 20vw;
+  --cc360-hero-star: 14px;
+  --cc360-hero-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ───────── Dark-mode adjustments ───────── */
+@media (prefers-color-scheme: dark) {
+  /* Hero + testimonial headings */
+  #cc360-hero h1,
+  #cc360-hero-reviews h2,
+  .cc360-hero-title,
+  .cc360-hero-name {
+    color: #f9fafc !important;
+  }
+  .cc360-hero-desc,
+  .cc360-hero-text,
+  .cc360-hero-date,
+  .cc360-hero-meta {
+    color: #d1d5db !important;
+  }
+  .cc360-hero-input {
+    background: #1f2227;
+    color: #f9fafc;
+    border-color: #374151;
+  }
+  .cc360-hero-input::placeholder {
+    color: #6b7280;
+  }
+  .cc360-hero-btn:hover {
+    background: #c42800;
+  }
+  .cc360-hero-card,
+  .cc360-hero-stack .cc360-hero-card {
+    background: #16181c !important;
+    box-shadow: 0 3px 12px rgb(0 0 0 / .55);
+  }
+  .cc360-hero-nav {
+    background: #1f2227;
+    color: #f9fafc;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cc360-hero-gray: #9ca3af;
+    background: #0f1114;
+    color: #e5e7eb;
+  }
+}
+
+/* ─── Base Reset & Variables ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#cc360-hero-widget {
+  font-family: var(--cc360-hero-font-sans);
+  line-height: 1.45;
+  isolation: isolate;
+}
+
+/* ─── Optional Nebula Backdrop ─── */
+.cc360-hero-nebula-bg {
+  --space: #f9fafc;
+  --glow: 0, 140, 255;
+  --power: .15;
+  --vignette: rgba(255, 255, 255, .55);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 55%, var(--vignette) 100%),
+    radial-gradient(650px 320px at 8% 15%, rgba(var(--glow), calc(var(--power) * .80)) 0%, transparent 70%),
+    radial-gradient(550px 270px at 8% 51%, rgba(var(--glow), calc(var(--power) * .68)) 0%, transparent 72%),
+    radial-gradient(480px 240px at 8% 87%, rgba(var(--glow), calc(var(--power) * .60)) 0%, transparent 74%),
+    radial-gradient(380px 200px at 92% 25%, rgba(var(--glow), calc(var(--power) * .82)) 0%, transparent 70%),
+    radial-gradient(340px 180px at 84% 56%, rgba(var(--glow), calc(var(--power) * .70)) 0%, transparent 72%),
+    radial-gradient(360px 190px at 91% 87%, rgba(var(--glow), calc(var(--power) * .62)) 0%, transparent 72%),
+    var(--space) !important;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (prefers-color-scheme: dark) {
+  .cc360-hero-nebula-bg {
+    --space: #0b0b0d;
+    --power: .30;
+    --vignette: rgba(0, 0, 0, .65);
+  }
+}
+.cc360-hero-nebula-bg [class*="row"],
+.cc360-hero-nebula-bg [class*="container"],
+.cc360-hero-nebula-bg [class*="column"] {
+  background: transparent !important;
+}
+
+/* ─── HERO SECTION ─── */
+#cc360-hero {
+  background: inherit;
+}
+#cc360-hero .cc360-hero-wrap {
+  max-width: 1280px;
+  margin: auto;
+  padding-inline: 1.5rem;
+  display: grid;
+  gap: 2.5rem;
+}
+@media (max-width: 768px) {
+  #cc360-hero .cc360-hero-wrap {
+    padding-inline: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  #cc360-hero .cc360-hero-wrap {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    min-height: 70vh;
+  }
+}
+#cc360-hero h1 {
+  font-size: clamp(2.25rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin-bottom: 1.35rem;
+  color: #111;
+  font-family: var(--cc360-hero-font-sans);
+  max-width: 20ch;
+}
+.cc360-hero-hl {
+  color: var(--cc360-hero-blue);
+}
+.cc360-hero-desc {
+  font-size: 1.125rem;
+  max-width: 28rem;
+  margin-bottom: 2rem;
+  color: var(--cc360-hero-gray);
+}
+.cc360-hero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 32rem;
+}
+@media (min-width: 640px) {
+  .cc360-hero-form {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}
+.cc360-hero-input {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: var(--cc360-hero-pill);
+  padding: .75rem 1.5rem;
+  font-size: 1rem;
+  background: #fff;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #93c5fd;
+  outline: none;
+}
+.cc360-hero-btn {
+  padding: .75rem 2rem;
+  border-radius: var(--cc360-hero-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--cc360-hero-blue);
+  border: none;
+  cursor: pointer;
+  transition: background .15s;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-btn:hover {
+  background: var(--cc360-hero-blue-hv);
+}
+.cc360-hero-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 1rem;
+  background: #000;
+  box-shadow: 0 0 36px rgb(0 0 0 / .15);
+}
+
+/* ─── REVIEWS SECTION ─── */
+#cc360-hero-reviews {
+  background: inherit;
+  text-align: center;
+  padding-inline: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0 0 var(--cc360-hero-curve-lg) var(--cc360-hero-curve-lg);
+}
+@media (max-width: 768px) {
+  #cc360-hero-reviews {
+    padding-inline: 1rem;
+    border-radius: 0 0 var(--cc360-hero-curve-sm) var(--cc360-hero-curve-sm);
+  }
+}
+#cc360-hero-reviews h2 {
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  font-weight: 800;
+  margin-bottom: .55rem;
+  color: #111;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-meta {
+  font-size: 1rem;
+  color: var(--cc360-hero-gray);
+  font-weight: 600;
+  display: inline-flex;
+  gap: .25rem;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-meta .star {
+  color: var(--cc360-hero-blue);
+  font-size: 1.2rem;
+}
+
+/* Carousel container */
+.cc360-hero-carousel {
+  position: relative;
+  margin-top: 3rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+#cc360-hero-track {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+  will-change: transform; /* perf */
+}
+@media (max-width: 600px) {
+  #cc360-hero-track {
+    gap: .75rem;
+  }
+}
+.cc360-hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / .15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cc360-hero-blue);
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 2;
+  opacity: .9;
+}
+.cc360-hero-nav:hover {
+  opacity: 1;
+}
+.cc360-hero-prev {
+  left: 1rem;
+}
+.cc360-hero-next {
+  right: 1rem;
+}
+@media (max-width: 640px) {
+  .cc360-hero-nav {
+    display: none;
+  }
+}
+
+/* Slide cards */
+.cc360-hero-card,
+.cc360-hero-stack {
+  flex: 0 0 320px;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 3px 12px rgb(0 0 0 / .1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.cc360-hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgb(0 0 0 / .12);
+}
+@media (max-width: 600px) {
+  .cc360-hero-card,
+  .cc360-hero-stack {
+    flex-basis: 260px;
+    max-width: 260px;
+  }
+}
+.cc360-hero-stack {
+  padding: 0;
+  gap: 1rem;
+}
+.cc360-hero-stack .cc360-hero-card {
+  flex: 1;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.25rem;
+}
+.cc360-hero-stack .cc360-hero-card:first-child {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Header inside each card */
+.cc360-hero-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: .9rem;
+}
+.cc360-hero-avatar,
+.cc360-hero-init {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: .75rem;
+  background: #e2e8f0;
+  flex-shrink: 0;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-name {
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.01em;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-date {
+  font-size: .78rem;
+  color: var(--cc360-hero-gray);
+  margin-top: 2px;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-stars {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--cc360-hero-blue);
+  display: flex;
+  align-items: center;
+  margin-top: .45rem;
+}
+.cc360-hero-stars svg {
+  width: var(--cc360-hero-star);
+  height: var(--cc360-hero-star);
+  fill: currentColor;
+  margin-right: 2px;
+}
+
+/* Body text */
+.cc360-hero-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111;
+  margin: .3rem 0 .5rem;
+  line-height: 1.35;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-text {
+  font-size: .93rem;
+  color: #4a4a4a;
+  flex-grow: 1;
+  overflow: hidden;
+  max-height: calc(1.45 * 4 * .93rem);
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  font-family: var(--cc360-hero-font-sans);
+}
+.cc360-hero-text.open {
+  max-height: none;
+  -webkit-line-clamp: unset;
+}
+.cc360-hero-toggle {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: var(--cc360-hero-blue);
+  cursor: pointer;
+  font-size: .82rem;
+  margin-top: .5rem;
+  padding: 0;
+  user-select: none;
+  font-family: var(--cc360-hero-font-sans);
+}
+
+/* Mobile: stars below name */
+@media (max-width: 640px) {
+  .cc360-hero-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cc360-hero-stars {
+    margin-top: .45rem;
+  }
+}
+
+#cc360-hero-reviews .cc360-hero-wrap {
+  max-width: 1280px;
+  margin: auto;
+  padding-block: 4rem;
+}
+</style>
+
+<!-- 2 ▸ Markup -->
+<div id="cc360-hero-widget" class="cc360-hero-nebula-bg">
+  <!-- HERO -->
+  <section id="cc360-hero" aria-labelledby="cc360-hero-heading">
+    <div class="cc360-hero-wrap">
+      <div class="cc360-hero-content">
+        <h1 id="cc360-hero-heading">
+          Build Your Course Empire<br>
+          <span class="cc360-hero-hl">Without the Tech Headache</span>
+        </h1>
+        <p class="cc360-hero-desc">
+          Course Creator 360 is the all-in-one platform that replaces 12+ tools. 
+          Launch your course in days, not months, with battle-tested templates and automation.
+        </p>
+        <form class="cc360-hero-form" action="#" method="POST" aria-label="Get started form">
+          <input 
+            type="email" 
+            class="cc360-hero-input" 
+            placeholder="Enter your email" 
+            required 
+            aria-label="Email address"
+            autocomplete="email"
+          >
+          <button type="submit" class="cc360-hero-btn" aria-label="Get started with Course Creator 360">
+            Get Started Free
+          </button>
+        </form>
+      </div>
+      <div class="cc360-hero-media">
+        <iframe 
+          class="cc360-hero-video"
+          src="https://customer-t943x570k2jy8ms2.cloudflarestream.com/f826389a5190704881329a11411d30d2/watch"
+          title="Course Creator 360 Demo"
+          loading="lazy"
+          allow="autoplay; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="cc360-hero-reviews" aria-label="Customer testimonials">
+    <h2>What our customers say about us</h2>
+    <div class="cc360-hero-meta">
+      <span id="cc360-hero-avg">5.00</span><span class="star">★</span>
+      <span id="cc360-hero-total">0</span> reviews
+    </div>
+
+    <div class="cc360-hero-carousel">
+      <button class="cc360-hero-nav cc360-hero-prev" aria-label="Previous slide" type="button">‹</button>
+      <div id="cc360-hero-track"></div>
+      <button class="cc360-hero-nav cc360-hero-next" aria-label="Next slide" type="button">›</button>
+    </div>
+  </section>
+</div>
+
+<!-- 3 ▸ JS Data & Rendering -->
+<script>
+  'use strict';
+  (function() {
+    const data = {
+      testimonials: [
+        {
+          name: 'Sarah Johnson',
+          title: 'Fitness Coach',
+          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
+          date: '2024-05-18',
+          stars: 5,
+          reviewTitle: "Transformed my business!",
+          reviewText: "Course Creator 360 helped me launch my fitness course in just two weeks. The templates are amazing and the support is top-notch. I made my first $10k in the first month!"
+        },
+        {
+          name: 'Michael Chen',
+          title: 'Business Consultant',
+          initials: 'MC',
+          date: '2024-05-15',
+          stars: 5,
+          reviewTitle: "All-in-one is an understatement",
+          reviewText: "I was using 5 different tools before switching to CC360. Now everything is in one place, from my website to my email marketing. It's a game-changer for my productivity."
+        },
+        {
+          name: 'Emily Rodriguez',
+          title: 'Language Teacher',
+          avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=80&h=80&fit=crop',
+          date: '2024-05-12',
+          stars: 5,
+          reviewTitle: "So easy to use!",
+          reviewText: "I'm not a tech-savvy person, but CC360 made it so simple to create and sell my language courses. The community feature is also fantastic for engaging with my students."
+        },
+        {
+          name: 'David Lee',
+          title: 'Marketing Expert',
+          initials: 'DL',
+          date: '2024-05-10',
+          stars: 4,
+          reviewTitle: "Great value for the price",
+          reviewText: "The number of features you get for the price is unbeatable. The funnel builder is powerful and has helped me double my conversion rates. A few more integrations would make it perfect."
+        },
+        {
+          name: 'Jessica Williams',
+          title: 'Art Instructor',
+          avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop',
+          date: '2024-05-08',
+          stars: 5,
+          reviewTitle: "Incredible support team",
+          reviewText: "I had an issue with setting up my custom domain, and the support team responded within minutes and solved it for me. They are always so friendly and helpful."
+        }
+      ]
+    };
+
+    /* Helper to create star icons */
+    function getStars(n=5) {
+      let str = '';
+      for(let i=0; i<n; i++) {
+        str += `<svg viewBox="0 0 20 20"><path d="M10 1l3.09 6.26L20 7.27l-5 4.87 1.18 6.88L10 15.34l-6.18 3.68L5 12.14l-5-4.87 6.91-1.01L10 1z"/></svg>`;
+      }
+      return str;
+    }
+
+    /* Render a single testimonial card */
+    function renderCard(item) {
+      const card = document.createElement('article');
+      card.className = 'cc360-hero-card';
+
+      const avatar = item.avatar
+        ? `<img class="cc360-hero-avatar" src="${item.avatar}" alt="${item.name}" loading="lazy" width="44" height="44">`
+        : `<div class="cc360-hero-init" aria-hidden="true">${item.initials}</div>`;
+
+      card.innerHTML = `
+        <div class="cc360-hero-head">
+          ${avatar}
+          <div>
+            <div class="cc360-hero-name">${item.name}</div>
+            <div class="cc360-hero-stars">${getStars(item.stars)}</div>
+          </div>
+        </div>
+        <h3 class="cc360-hero-title">${item.reviewTitle}</h3>
+        <p class="cc360-hero-text">${item.reviewText}</p>
+        <button class="cc360-hero-toggle" aria-expanded="false" type="button">Read more</button>
+      `;
+
+      // Read more toggle
+      const text = card.querySelector('.cc360-hero-text');
+      const toggle = card.querySelector('.cc360-hero-toggle');
+      // check if text is overflowing
+      if (text.scrollHeight > text.clientHeight) {
+        toggle.style.display = 'block';
+      } else {
+        toggle.style.display = 'none';
+      }
+      toggle.addEventListener('click', () => {
+        const isExpanded = text.classList.toggle('open');
+        toggle.textContent = isExpanded ? 'Read less' : 'Read more';
+        toggle.setAttribute('aria-expanded', isExpanded);
+      });
+
+      return card;
+    }
+
+    /* Render all cards to track */
+    const track = document.getElementById('cc360-hero-track');
+    if (track) {
+      data.testimonials.forEach(item => track.append(renderCard(item)));
+
+      /* Average rating & total reviews */
+      const totalReviews = data.testimonials.length;
+      const avgRating = (data.testimonials.reduce((sum, t) => sum + t.stars, 0) / totalReviews).toFixed(2);
+      document.getElementById('cc360-hero-avg').textContent = avgRating;
+      document.getElementById('cc360-hero-total').textContent = `${totalReviews} reviews`;
+
+      /* Carousel behavior */
+      const carousel = document.querySelector('.cc360-hero-carousel');
+      const prevBtn = carousel.querySelector('.cc360-hero-prev');
+      const nextBtn = carousel.querySelector('.cc360-hero-next');
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        if (!track.children.length) return;
+        const cardWidth = track.children[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(track).gap);
+        const offset = -currentIndex * (cardWidth + gap);
+        track.style.transform = `translateX(${offset}px)`;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const visibleCards = Math.floor(carousel.offsetWidth / (track.children[0].offsetWidth + parseInt(getComputedStyle(track).gap)));
+        if (currentIndex < track.children.length - visibleCards) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      window.addEventListener('resize', updateCarousel);
+
+      // Initial position
+      updateCarousel();
+    }
+  })();
+</script> 

@@ -1,0 +1,142 @@
+<!-- ░░ CourseCreator360 • Support Highlights (auto light/dark mode) ░░ -->
+<link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Helvetica+Now+Bold&display=swap"
+      as="style"
+      onload="this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Helvetica+Now+Bold&display=swap">
+</noscript>
+
+<style>
+  /* === CC360 Support Highlight · v2.1 (adds solid card background) === */
+  :root {
+    --cc360-info-text-color: #131313;      /* dark text for light mode */
+    --cc360-info-bg-color: #f4feff;        /* light‑mode background */
+    --cc360-info-card-bg: #ffffff;         /* card background in light mode */
+    --cc360-info-gap: 1rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cc360-info-text-color: #ffffff;    /* light text for dark mode */
+      --cc360-info-bg-color: #000000;      /* page background in dark mode */
+      --cc360-info-card-bg: #111111;       /* card background in dark mode */
+    }
+  }
+
+  #cc360-info-support {
+    color: var(--cc360-info-text-color);
+    font-family: Arial, sans-serif;
+    padding-inline: 1.5rem;
+    background: var(--cc360-info-bg-color);          /* section gets the theme bg too */
+  }
+
+  @media (max-width: 768px) {
+    #cc360-info-support {
+      padding-inline: 1rem;
+    }
+  }
+
+  #cc360-info-support .cc360-info-wrap {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  /* intro copy */
+  #cc360-info-support .cc360-info-intro {
+    text-align: center;
+    max-width: 600px;
+  }
+  #cc360-info-support h2 {
+    font: normal clamp(1rem, 3vw, 1.25rem)/1 "Arial Rounded MT Bold", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: .5rem;
+    color: var(--cc360-info-text-color);
+  }
+  #cc360-info-support h3 {
+    font: 700 clamp(2rem, 5vw, 3rem)/1.1 "Helvetica Now Bold", sans-serif;
+    margin-bottom: 1rem;
+    color: var(--cc360-info-text-color);
+  }
+  #cc360-info-support p {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    line-height: 1.6;
+    max-width: 600px;
+    color: var(--cc360-info-text-color);
+  }
+
+  /* card grid */
+  .cc360-info-cards {
+    display: flex;
+    gap: var(--cc360-info-gap);
+    flex-wrap: nowrap;
+  }
+  .cc360-info-card {
+    flex: 0 0 calc(25% - var(--cc360-info-gap));
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--cc360-info-card-bg);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .cc360-info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+  .cc360-info-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: none;
+    aspect-ratio: 16/9;
+  }
+
+  /* mobile 2 × 2 */
+  @media (max-width: 768px) {
+    #cc360-info-support .cc360-info-wrap {
+      flex-direction: column;
+      align-items: center;
+    }
+    .cc360-info-cards {
+      flex-wrap: wrap;
+    }
+    .cc360-info-card {
+      flex: 0 0 calc(50% - var(--cc360-info-gap));
+      margin-bottom: var(--cc360-info-gap);
+    }
+  }
+</style>
+
+<section id="cc360-info-support" aria-labelledby="cc360-info-support-heading">
+  <div class="cc360-info-wrap">
+    <div class="cc360-info-intro">
+      <h2 id="cc360-info-support-heading">Not a techy? No problem</h2>
+      <h3>Get help from real people. No bots.</h3>
+      <p>Hate contacting support and waiting forever? Our users wait less than 50&nbsp;seconds on average.</p>
+    </div>
+
+    <div class="cc360-info-cards" role="region" aria-label="Support highlights">
+      <div class="cc360-info-card">
+        <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/6788f5463a448001a0effcaf_d2f2ab47.webp"
+             alt="50-second average response time" loading="lazy" width="300" height="169">
+      </div>
+      <div class="cc360-info-card">
+        <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/6788f546953d2d6c10995ce5_95b1797e.webp"
+             alt="98% customer‑satisfaction score" loading="lazy" width="300" height="169">
+      </div>
+      <div class="cc360-info-card">
+        <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/6788f5463a448001a0effcaf_d2f2ab47.webp"
+             alt="24/7 live‑chat support" loading="lazy" width="300" height="169">
+      </div>
+      <div class="cc360-info-card">
+        <img src="https://cc360-pages.s3.us-west-2.amazonaws.com/6788f5463a448001a0effcaf_d2f2ab47.webp"
+             alt="Free training bonuses" loading="lazy" width="300" height="169">
+      </div>
+    </div>
+  </div>
+</section> 
